@@ -31,7 +31,7 @@ const Form: React.FC = () => {
         type="text"
         style={inputStyle}
         value={item}
-        placeholder="Jus d'orange"
+        placeholder="Ex : Jus d'orange"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setItem(e.target.value)
         }
