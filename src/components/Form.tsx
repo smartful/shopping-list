@@ -1,11 +1,14 @@
-import React, { ReactEventHandler, useState } from "react";
+import React, { useState, useContext } from "react";
+import { ItemContext } from "../context/ItemProvider";
 
 const Form: React.FC = () => {
   const [item, setItem] = useState<string>("");
+  const { addItem } = useContext(ItemContext);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Todo
+    console.log("Item : ", item);
+    addItem(item);
   };
 
   const inputStyle: React.CSSProperties = {
