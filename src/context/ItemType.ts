@@ -1,5 +1,11 @@
+export type ItemType = {
+  id: number;
+  text: string;
+};
+
 export interface ItemState {
-  items: string[];
+  items: ItemType[];
   currentItem: string;
-  addItem: (item: string) => void;
+  addItem: (item: ItemType) => void;
+  deleteItem: (id: number) => void;
 }

@@ -6,5 +6,5 @@ export enum ItemActionType {
 
 export interface ItemAction {
   type: ItemActionType;
-  payload: string;
+  payload: any;
 }

@@ -1,12 +1,26 @@
 import React, { createContext, useReducer } from "react";
 import ItemReducer from "./ItemReducer";
-import { ItemState } from "./ItemType";
+import { ItemState, ItemType } from "./ItemType";
 import { ItemActionType } from "./ItemActionType";
 
 const initialState: ItemState = {
-  items: ["Jus d'orande", "Miel", "Biscotte"],
+  items: [
+    {
+      id: 1,
+      text: "Jus d'orange",
+    },
+    {
+      id: 2,
+      text: "Miel",
+    },
+    {
+      id: 3,
+      text: "Biscotte",
+    },
+  ],
   currentItem: "",
-  addItem: (item: string) => {},
+  addItem: (item: ItemType) => {},
+  deleteItem: (id: number) => {},
 };
 
 export const ItemContext = createContext<ItemState>(initialState);
@@ -14,10 +28,17 @@ export const ItemContext = createContext<ItemState>(initialState);
 const ItemProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(ItemReducer, initialState);
 
-  const addItem = (item: string) => {
+  const addItem = (item: ItemType) => {
     dispatch({
       type: ItemActionType.ADD_ITEM,
       payload: item,
+    });
+  };
+
+  const deleteItem = (id: number) => {
+    dispatch({
+      type: ItemActionType.DELETE_ITEM,
+      payload: id,
     });
   };
 
@@ -27,6 +48,7 @@ const ItemProvider: React.FC = ({ children }) => {
         items: state.items,
         currentItem: state.currentItem,
         addItem,
+        deleteItem,
       }}
     >
       {children}

@@ -13,8 +13,8 @@ const ItemsContainer: React.FC = () => {
 
   return (
     <div style={containerStyle}>
-      {items.map((item, idx) => (
-        <Item key={idx} text={item} />
+      {items.map((item) => (
+        <Item key={item.id} text={item.text} id={item.id} />
       ))}
     </div>
   );

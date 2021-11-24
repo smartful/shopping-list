@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { ItemContext } from "../context/ItemProvider";
+import { ItemType } from "../context/ItemType";
 
 const Form: React.FC = () => {
   const [item, setItem] = useState<string>("");
@@ -7,8 +8,11 @@ const Form: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Item : ", item);
-    addItem(item);
+    const newItem: ItemType = {
+      id: Date.now(),
+      text: item,
+    };
+    addItem(newItem);
   };
 
   const inputStyle: React.CSSProperties = {
