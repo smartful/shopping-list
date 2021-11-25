@@ -1,18 +1,44 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ItemContext } from "../context/ItemProvider";
 import { ItemType } from "../context/ItemType";
 
 const Form: React.FC = () => {
-  const [item, setItem] = useState<string>("");
-  const { addItem } = useContext(ItemContext);
+  const initialItem: ItemType = {
+    id: 0,
+    text: "",
+  };
+  const [item, setItem] = useState<ItemType>(initialItem);
+  const { text } = item;
+  const { currentItem, addItem, modifyItem, clearCurrent } =
+    useContext(ItemContext);
+
+  useEffect(() => {
+    if (currentItem !== null) {
+      setItem(currentItem);
+    } else {
+      setItem(initialItem);
+    }
+  }, [currentItem]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newItem: ItemType = {
-      id: Date.now(),
-      text: item,
-    };
-    addItem(newItem);
+
+    if (currentItem === null) {
+      const newItem: ItemType = {
+        id: Date.now(),
+        text: item.text,
+      };
+      addItem(newItem);
+    } else {
+      modifyItem(item);
+    }
+
+    setItem(initialItem);
+    clearCurrent();
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setItem({ ...item, text: e.target.value });
   };
 
   const inputStyle: React.CSSProperties = {
@@ -37,11 +63,9 @@ const Form: React.FC = () => {
       <input
         type="text"
         style={inputStyle}
-        value={item}
+        value={text}
         placeholder="Ex : Jus d'orange"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setItem(e.target.value)
-        }
+        onChange={handleChange}
       />
       <button type="submit" style={buttonStyle}>
         Submit

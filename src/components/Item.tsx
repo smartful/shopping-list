@@ -5,7 +5,7 @@ import { ItemContext } from "../context/ItemProvider";
 import { ItemType } from "../context/ItemType";
 
 const Item: React.FC<ItemType> = ({ id, text }) => {
-  const { deleteItem } = useContext(ItemContext);
+  const { deleteItem, setCurrent, clearCurrent } = useContext(ItemContext);
   const itemStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "row",
@@ -20,15 +20,21 @@ const Item: React.FC<ItemType> = ({ id, text }) => {
     cursor: "pointer",
   };
 
+  const itemElement: ItemType = {
+    id,
+    text,
+  };
+
   const handleDelete = () => {
     deleteItem(id);
+    clearCurrent();
   };
 
   return (
     <div style={itemStyle}>
       <div>{text}</div>
       <div>
-        <button style={btnStyle}>
+        <button style={btnStyle} onClick={() => setCurrent(itemElement)}>
           <Edit />
         </button>
         <button style={btnStyle} onClick={handleDelete}>

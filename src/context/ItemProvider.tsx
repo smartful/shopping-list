@@ -18,9 +18,12 @@ const initialState: ItemState = {
       text: "Biscotte",
     },
   ],
-  currentItem: "",
+  currentItem: null,
   addItem: (item: ItemType) => {},
   deleteItem: (id: number) => {},
+  modifyItem: (item: ItemType) => {},
+  setCurrent: (item: ItemType) => {},
+  clearCurrent: () => {},
 };
 
 export const ItemContext = createContext<ItemState>(initialState);
@@ -42,6 +45,27 @@ const ItemProvider: React.FC = ({ children }) => {
     });
   };
 
+  const modifyItem = (item: ItemType) => {
+    dispatch({
+      type: ItemActionType.MODIFY_ITEM,
+      payload: item,
+    });
+  };
+
+  const setCurrent = (item: ItemType) => {
+    dispatch({
+      type: ItemActionType.SET_CURRENT,
+      payload: item,
+    });
+  };
+
+  const clearCurrent = () => {
+    dispatch({
+      type: ItemActionType.CLEAR_CURRENT,
+      payload: null,
+    });
+  };
+
   return (
     <ItemContext.Provider
       value={{
@@ -49,6 +73,9 @@ const ItemProvider: React.FC = ({ children }) => {
         currentItem: state.currentItem,
         addItem,
         deleteItem,
+        modifyItem,
+        setCurrent,
+        clearCurrent,
       }}
     >
       {children}
