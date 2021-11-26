@@ -24,6 +24,7 @@ const initialState: ItemState = {
   modifyItem: (item: ItemType) => {},
   setCurrent: (item: ItemType) => {},
   clearCurrent: () => {},
+  clearAll: () => {},
 };
 
 export const ItemContext = createContext<ItemState>(initialState);
@@ -66,6 +67,13 @@ const ItemProvider: React.FC = ({ children }) => {
     });
   };
 
+  const clearAll = () => {
+    dispatch({
+      type: ItemActionType.CLEAR_ALL,
+      payload: null,
+    });
+  };
+
   return (
     <ItemContext.Provider
       value={{
@@ -76,6 +84,7 @@ const ItemProvider: React.FC = ({ children }) => {
         modifyItem,
         setCurrent,
         clearCurrent,
+        clearAll,
       }}
     >
       {children}

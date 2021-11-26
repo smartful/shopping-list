@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ItemContext } from "../context/ItemProvider";
 
 const ClearBtn: React.FC = () => {
+  const { clearAll } = useContext(ItemContext);
   const btnStyle: React.CSSProperties = {
     color: "red",
     backgroundColor: "transparent",
@@ -9,7 +11,11 @@ const ClearBtn: React.FC = () => {
     marginBottom: "2rem",
   };
 
-  return <button style={btnStyle}>Tout supprimer</button>;
+  return (
+    <button style={btnStyle} onClick={clearAll}>
+      Tout supprimer
+    </button>
+  );
 };
 
 export default ClearBtn;

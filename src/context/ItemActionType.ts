@@ -4,6 +4,7 @@ export enum ItemActionType {
   MODIFY_ITEM = "MODIFY_ITEM",
   SET_CURRENT = "SET_CURRENT",
   CLEAR_CURRENT = "CLEAR_CURRENT",
+  CLEAR_ALL = "CLEAR_ALL",
 }
 
 export interface ItemAction {

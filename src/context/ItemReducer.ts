@@ -2,8 +2,6 @@ import { ItemActionType, ItemAction } from "./ItemActionType";
 import { ItemState, ItemType } from "./ItemType";
 
 const ItemReducer = (state: ItemState, action: ItemAction) => {
-  const items = [...state.items];
-
   switch (action.type) {
     case ItemActionType.ADD_ITEM:
       return {
@@ -29,9 +27,10 @@ const ItemReducer = (state: ItemState, action: ItemAction) => {
         ...state,
         currentItem: action.payload,
       };
-    case ItemActionType.CLEAR_CURRENT:
+    case ItemActionType.CLEAR_ALL:
       return {
         ...state,
+        items: [],
         currentItem: null,
       };
     default:

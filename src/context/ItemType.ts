@@ -11,4 +11,5 @@ export interface ItemState {
   modifyItem: (item: ItemType) => void;
   setCurrent: (item: ItemType) => void;
   clearCurrent: () => void;
+  clearAll: () => void;
 }
