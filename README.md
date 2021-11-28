@@ -1,6 +1,6 @@
-# Shopping List
+# Shopping List Zustand
 
-Simili Todo List
+Shopping List with the library Zustand to manage the state management.
 
 ## Getting Started with Create React App
 

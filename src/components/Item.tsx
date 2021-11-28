@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ReactComponent as Edit } from "../img/edit.svg";
 import { ReactComponent as Delete } from "../img/delete.svg";
-import { ItemContext } from "../context/ItemProvider";
-import { ItemType } from "../context/ItemType";
+import { ItemType } from "../types/ItemType";
+import { useStore } from "../store";
 
 const Item: React.FC<ItemType> = ({ id, text }) => {
-  const { deleteItem, setCurrent, clearCurrent } = useContext(ItemContext);
   const itemStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "row",
@@ -24,6 +23,10 @@ const Item: React.FC<ItemType> = ({ id, text }) => {
     id,
     text,
   };
+
+  const setCurrent = useStore((state) => state.setCurrent);
+  const clearCurrent = useStore((state) => state.clearCurrent);
+  const deleteItem = useStore((state) => state.deleteItem);
 
   const handleDelete = () => {
     deleteItem(id);

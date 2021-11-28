@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { ItemContext } from "../context/ItemProvider";
-import { ItemType } from "../context/ItemType";
+import React, { useState, useEffect } from "react";
+import { ItemType } from "../types/ItemType";
+import { useStore } from "../store";
 
 const Form: React.FC = () => {
   const initialItem: ItemType = {
@@ -9,8 +9,10 @@ const Form: React.FC = () => {
   };
   const [item, setItem] = useState<ItemType>(initialItem);
   const { text } = item;
-  const { currentItem, addItem, modifyItem, clearCurrent } =
-    useContext(ItemContext);
+  const currentItem = useStore((state) => state.currentItem);
+  const addItem = useStore((state) => state.addItem);
+  const modifyItem = useStore((state) => state.modifyItem);
+  const clearCurrent = useStore((state) => state.clearCurrent);
 
   useEffect(() => {
     if (currentItem !== null) {

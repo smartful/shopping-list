@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
-import { ItemContext } from "../context/ItemProvider";
+import React from "react";
 import Item from "./Item";
+import { useStore } from "../store";
 
 const ItemsContainer: React.FC = () => {
-  const { items } = useContext(ItemContext);
   const containerStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
     width: "30rem",
     marginBottom: "1.5rem",
   };
+
+  const items = useStore((state) => state.items);
 
   return (
     <div style={containerStyle}>

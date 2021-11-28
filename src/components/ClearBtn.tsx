@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
-import { ItemContext } from "../context/ItemProvider";
+import React from "react";
+import { useStore } from "../store";
 
 const ClearBtn: React.FC = () => {
-  const { clearAll } = useContext(ItemContext);
   const btnStyle: React.CSSProperties = {
     color: "red",
     backgroundColor: "transparent",
@@ -10,6 +9,8 @@ const ClearBtn: React.FC = () => {
     cursor: "pointer",
     marginBottom: "2rem",
   };
+
+  const clearAll = useStore((state) => state.clearAll);
 
   return (
     <button style={btnStyle} onClick={clearAll}>
